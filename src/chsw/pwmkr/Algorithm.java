@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 public class Algorithm {
 
-	private Integer Aprime, Bprime, Cprime, Dprime;
-	private BigInteger bfi;
+	private static Integer Aprime, Bprime, Cprime, Dprime;
+	private static BigInteger bfi;
 	
 	public Algorithm() { }
 	
-	private void setValues(String A, String B, Integer C, Integer D)
+	private static void setValues(String A, String B, Integer C, Integer D)
 	{
 		Aprime = Math.abs(A.hashCode());
 		Bprime = Math.abs(B.hashCode());
@@ -39,7 +39,7 @@ public class Algorithm {
 		}
 	}
 	
-	public String getPW(String filename, String input1, String input2, int row, int col,
+	public static String getPW(String filename, String input1, String input2, int row, int col,
 			int length) throws FileNotFoundException
 	{
 		setValues(input1,input2,row,col);
