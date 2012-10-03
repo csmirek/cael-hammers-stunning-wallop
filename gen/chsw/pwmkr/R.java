@@ -14,29 +14,38 @@ public final class R {
         public static final int gray=0x7f050000;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int geargray92=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int x92=0x7f020002;
     }
     public static final class id {
-        public static final int BigRL=0x7f060004;
-        public static final int RL1=0x7f060008;
-        public static final int RL2=0x7f06000b;
-        public static final int RL3=0x7f06000e;
-        public static final int RL4=0x7f060011;
+        public static final int BigRL=0x7f06000b;
+        public static final int RL1=0x7f06000f;
+        public static final int RL2=0x7f060012;
+        public static final int RL3=0x7f060015;
+        public static final int RL4=0x7f060018;
         public static final int RelativeLayout1=0x7f060000;
-        public static final int TextView01=0x7f06000d;
-        public static final int TextView02=0x7f060010;
-        public static final int button1=0x7f060001;
-        public static final int button2=0x7f060002;
-        public static final int cancelBtn=0x7f060007;
-        public static final int cedit=0x7f06000c;
-        public static final int checkBox1=0x7f060012;
-        public static final int dedit=0x7f06000f;
-        public static final int header=0x7f060003;
-        public static final int linearLayout1=0x7f060005;
-        public static final int redit=0x7f060009;
-        public static final int rtext=0x7f06000a;
-        public static final int saveBtn=0x7f060006;
-        public static final int textView2=0x7f060013;
+        public static final int TextView01=0x7f060014;
+        public static final int TextView02=0x7f060017;
+        public static final int cancelBtn=0x7f06000e;
+        public static final int cedit=0x7f060013;
+        public static final int closeBtn=0x7f060002;
+        public static final int dedit=0x7f060016;
+        public static final int header=0x7f06000a;
+        public static final int iinput1=0x7f060006;
+        public static final int iinput2=0x7f060008;
+        public static final int length=0x7f060009;
+        public static final int linearLayout1=0x7f06000c;
+        public static final int output=0x7f060005;
+        public static final int redit=0x7f060010;
+        public static final int regen=0x7f060019;
+        public static final int rtext=0x7f060011;
+        public static final int saveBtn=0x7f06000d;
+        public static final int settingsBtn=0x7f060001;
+        public static final int sinput1=0x7f060003;
+        public static final int sinput2=0x7f060007;
+        public static final int submitBtn=0x7f060004;
+        public static final int textView2=0x7f06001a;
     }
     public static final class layout {
         public static final int main=0x7f030000;

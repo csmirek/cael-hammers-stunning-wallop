@@ -1,10 +1,14 @@
 package chsw.pwmkr;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import android.content.Context;
 
 public class Algorithm {
 
@@ -39,33 +43,50 @@ public class Algorithm {
 		}
 	}
 	
-	public static String getPW(String filename, String input1, String input2, int row, int col,
-			int length) throws FileNotFoundException
+	public static String getPW(String filename, String sinput1, String sinput2, int iinput1, int iinput2,
+			int length, Context app) throws FileNotFoundException
 	{
-		setValues(input1,input2,row,col);
+		setValues(sinput1,sinput2,iinput1,iinput2);
 		
-		File readFile = new File(filename + ".txt");
-		Scanner scan = new Scanner(readFile);
-		ArrayList<String> inRAMFile = new ArrayList<String>();
+		/*File readFile = new File(filename + ".txt");
+		Scanner scan = new Scanner(readFile);*/
+		FileInputStream fis = app.openFileInput(filename + ".txt");
+		//ArrayList<String> inRAMFile = new ArrayList<String>();
 
-		while (scan.hasNextLine())
+		int c;
+		StringBuffer mystring = new StringBuffer();
+		try
+		{
+			while((c = fis.read()) > -1)
+			{
+				mystring.append((char)c);
+			}
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String[] inRAMFile = mystring.toString().split("\n");
+		
+		/*while (scan.hasNextLine())
 		{
 			inRAMFile.add(scan.nextLine());
 		}
-		scan.close();
+		scan.close();*/
 		
-		int rows = inRAMFile.size();
-		int columns = inRAMFile.get(0).length();
+		int rows = inRAMFile.length;
+		int columns = inRAMFile[0].length();
 
-		int nrow = Math.abs((Aprime * row) % rows);
-		int ncol = Math.abs((Bprime * col) % columns);
+		int nrow = Math.abs((Aprime * iinput1) % rows);
+		int ncol = Math.abs((Bprime * iinput2) % columns);
 		int nLength = Math.abs((Cprime * length) % (rows * columns));
 
 		char[] offset = new char[nLength];
 		for (int i = 0; i < nLength; i++)
 		{
-			offset[i] = inRAMFile.get((nrow + (i + ncol) / columns) % rows)
-					.charAt((ncol + i) % columns);
+			int q = (nrow + (i + ncol) / columns) % rows;
+			offset[i] = inRAMFile[q].charAt((ncol + i) % columns);//(ncol + i) % columns)];
 		}
 
 		String bfiString = bfi.toString();

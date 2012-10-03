@@ -1,11 +1,12 @@
 package chsw.pwmkr;
 
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import android.content.Context;
 
 public class GenerateFile
 {
@@ -16,24 +17,24 @@ public class GenerateFile
 	private GenerateFile() {}
 
 	public static void defaultGen(String name, String characterClass, int rows,
-			int columns)
+			int columns, Context app)
 	{
 		pat = Pattern.compile(characterClass);
 		rand = new Random();
 
-		generateFile(name, rows, columns);
+		generateFile(name, rows, columns, app);
 	}
 
 	public static void seedGen(String name, String characterClass, int rows,
-			int columns, int seed)
+			int columns, int seed, Context app)
 	{
 		pat = Pattern.compile(characterClass);
 		rand = new Random(seed);
 
-		generateFile(name, rows, columns);
+		generateFile(name, rows, columns, app);
 	}
 
-	private static void generateFile(String name, int rows, int columns)
+	private static void generateFile(String filename, int rows, int columns, Context app)
 	{
 		int[] intArray = new int[rows * columns];
 		for (int i = 0; i < rows * columns; i++)
@@ -43,16 +44,16 @@ public class GenerateFile
 
 		try
 		{
-			PrintWriter fout = new PrintWriter(new FileWriter(name + ".txt"));
+			FileOutputStream fos = app.openFileOutput(filename + ".txt", Context.MODE_PRIVATE);
 			for (int j = 0; j < rows; j++)
 			{
 				for (int k = 0; k < columns; k++)
 				{
-					fout.print((char) intArray[j * rows + k]);
+					fos.write((char) intArray[j * rows + k]);
 				}
-				fout.println();
+				fos.write('\n');
 			}
-			fout.close();
+			fos.close();
 		}
 		catch (IOException e)
 		{

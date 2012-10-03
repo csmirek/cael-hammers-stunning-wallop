@@ -6,21 +6,96 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/settingsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:onClick="goToSettings"
-        android:text="Settings" />
+        android:background="@drawable/geargray92"
+        android:onClick="goToSettings" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/closeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:onClick="onClick"
-        android:text="stuff" />
+        android:background="@drawable/x92"
+        android:onClick="close" />
+
+    <EditText
+        android:id="@+id/sinput1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/settingsBtn"
+        android:layout_marginTop="72dp"
+        android:layout_toLeftOf="@+id/submitBtn"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="37dp"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/iinput1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sinput1"
+        android:layout_toLeftOf="@+id/submitBtn"
+        android:gravity="center"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/sinput2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/sinput1"
+        android:layout_alignBottom="@+id/sinput1"
+        android:layout_alignLeft="@+id/iinput2"
+        android:layout_alignParentRight="true"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/iinput2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/iinput1"
+        android:layout_alignBottom="@+id/iinput1"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/submitBtn"
+        android:gravity="center"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iinput1"
+        android:layout_marginTop="19dp"
+        android:layout_toLeftOf="@+id/closeBtn"
+        android:layout_toRightOf="@+id/settingsBtn"
+        android:gravity="center"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/length"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:onClick="getPW"
+        android:text="Submit" />
 
 </RelativeLayout>

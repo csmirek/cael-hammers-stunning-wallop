@@ -2,40 +2,51 @@ package chsw.pwmkr;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-public class mainActivity extends Activity implements OnLongClickListener, OnClickListener
+public class mainActivity extends Activity
 {   
+	private Integer iinput1,iinput2,length;
+	private String sinput1,sinput2;
+	private EditText iiText1, iiText2, lengthText, sinText1, sinText2, output;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
 	    File check = this.getFileStreamPath(Globals.filename);
+	    iiText1 = (EditText)findViewById(R.id.iinput1);
+	    iiText2 = (EditText)findViewById(R.id.iinput2);
+	    sinText1 = (EditText)findViewById(R.id.sinput1);
+	    sinText2 = (EditText)findViewById(R.id.sinput2);
+	    lengthText = (EditText)findViewById(R.id.length);
+	    output = (EditText)findViewById(R.id.output);
+	    //output.setKeyListener(null);
 	    if(!check.exists())
 	    {
-	    	Toast.makeText(this, "no settings exist", Toast.LENGTH_LONG).show();
-	    	noSettingsDialog();
+	    	settingsDialog("No Settings Exist, Would You Like to Edit Settings Now?");
+	    }
+	    else
+	    {
+	    	readSettings();
 	    }
 	}
 
-	private void noSettingsDialog()
+	private void settingsDialog(String title)
 	{
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-    	alert.setTitle("No Settings Exist, Would You Like to Edit Settings Now?");
+    	alert.setTitle(title);
     	
     	alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() 
 	    	{
@@ -63,7 +74,7 @@ public class mainActivity extends Activity implements OnLongClickListener, OnCli
 		startActivityForResult(intent, 0);
 	}
 	
-	public void onClick(View v)
+	public void readSettings()
 	{
 		try
 		{
@@ -74,16 +85,58 @@ public class mainActivity extends Activity implements OnLongClickListener, OnCli
 			{
 				mystring.append((char)c);
 			}
-			Toast.makeText(this, mystring, Toast.LENGTH_LONG).show();
+			String[] lines = mystring.toString().split("\n");
+			
+			try
+			{
+				for(int i=0; i<3; i++)
+				{
+					String[] temp = lines[i].split(": ");
+					int val = Integer.parseInt(temp[1]);
+					
+					switch(i)
+					{
+						case 0:
+							Globals.rows = val;
+							break;
+						case 1:
+							Globals.columns = val;
+							break;
+						case 2:
+							Globals.defSeed = val;
+							break;
+					}
+				}
+			}
+			catch(Exception e)
+			{
+				settingsDialog("Settings Are Malformed, Would You Like to Edit Settings Now?");
+			}
 		}
-		catch (Exception e)
-		{
-			Toast.makeText(this, "no settings exist", Toast.LENGTH_LONG).show();
-		}
+		catch (Exception e) { }
 	}
 
-	public boolean onLongClick(View v) {
-		// TODO Auto-generated method stub
-		return false;
+	public void close(View v)
+	{
+		finish();
+		System.exit(0);
+	}
+	
+	public void getPW(View v)
+	{
+		readSettings();
+		GenerateFile.seedGen("symbols", Globals.symbolClass, Globals.rows, Globals.columns, Globals.defSeed, this);
+		try
+		{
+			iinput1 = Integer.parseInt(iiText1.getText().toString());
+			iinput2 = Integer.parseInt(iiText2.getText().toString());
+			sinput1 = sinText1.getText().toString();
+			sinput2 = sinText2.getText().toString();
+			length = Integer.parseInt(lengthText.getText().toString());
+			String pw = Algorithm.getPW("symbols", sinput1, sinput2, iinput1, iinput2, length, this);
+			Toast.makeText(this, pw, Toast.LENGTH_LONG).show();
+			output.setText(pw);
+		}
+		catch (FileNotFoundException e) { }
 	}
 }

@@ -114,7 +114,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:gravity="right"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:width="120dp" />
 
             <TextView
@@ -136,7 +136,7 @@
             android:layout_below="@+id/RL3" >
 
             <CheckBox
-                android:id="@+id/checkBox1"
+                android:id="@+id/regen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="Large Text"
+                android:text="Regenerate Files"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/gray" />
         </RelativeLayout>
