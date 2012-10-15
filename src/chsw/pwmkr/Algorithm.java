@@ -47,11 +47,8 @@ public class Algorithm {
 			int length, Context app) throws FileNotFoundException
 	{
 		setValues(sinput1,sinput2,iinput1,iinput2);
-		
-		/*File readFile = new File(filename + ".txt");
-		Scanner scan = new Scanner(readFile);*/
+
 		FileInputStream fis = app.openFileInput(filename + ".txt");
-		//ArrayList<String> inRAMFile = new ArrayList<String>();
 
 		int c;
 		StringBuffer mystring = new StringBuffer();
@@ -62,18 +59,9 @@ public class Algorithm {
 				mystring.append((char)c);
 			}
 		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String[] inRAMFile = mystring.toString().split("\n");
+		catch (IOException e){ }
 		
-		/*while (scan.hasNextLine())
-		{
-			inRAMFile.add(scan.nextLine());
-		}
-		scan.close();*/
+		String[] inRAMFile = mystring.toString().split("\n");
 		
 		int rows = inRAMFile.length;
 		int columns = inRAMFile[0].length();
@@ -82,6 +70,11 @@ public class Algorithm {
 		int ncol = Math.abs((Bprime * iinput2) % columns);
 		int nLength = Math.abs((Cprime * length) % (rows * columns));
 
+		if(nLength < length)
+		{
+			nLength = length * rows;
+		}
+		
 		char[] offset = new char[nLength];
 		for (int i = 0; i < nLength; i++)
 		{
