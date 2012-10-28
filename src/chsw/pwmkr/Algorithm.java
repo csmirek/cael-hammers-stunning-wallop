@@ -28,6 +28,10 @@ public class Algorithm {
 		bfi = BigInteger.valueOf(Cprime);
 		bfi = bfi.multiply(BigInteger.valueOf(Dprime));
 
+		BigInteger temp = BigInteger.valueOf(Aprime).multiply(BigInteger.valueOf(Bprime));
+		
+		bfi = bfi.add(temp);
+		
 		String bfiString = bfi.toString();
 
 		while (bfiString.endsWith("0"))
@@ -68,8 +72,8 @@ public class Algorithm {
 
 		int nrow = Math.abs((Aprime * iinput1) % rows);
 		int ncol = Math.abs((Bprime * iinput2) % columns);
-		int nLength = Math.abs((Cprime * length) % (rows * columns));
-
+		int nLength = Math.abs(((Cprime + Dprime) * length) % (rows * columns));
+		
 		if(nLength < length)
 		{
 			nLength = length * rows;
